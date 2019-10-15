@@ -76,5 +76,9 @@
             @yield('content')
         </main>
     </div>
+
+<script>
+    window.Laravel = "{{ csrf_token() }}";
+</script>
 </body>
 </html>

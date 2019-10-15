@@ -88,8 +88,8 @@ class GetSessionDetailsJob
 
 
         return [
-            'title'    => $sessionTitle,
-            'schedule' => $sessionSchedule,
+            'date'     => $sessionTitle,
+            'time'     => $sessionSchedule,
             'type'     => $sessionType,
             'location' => $sessionLocation
         ];

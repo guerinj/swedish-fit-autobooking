@@ -12,33 +12,48 @@
 
                         <div class="card-body text-center">
 
-                            <h3 class>Réservations à venir</h3>
-                            <small class="text-muted">Vous n'avez aucune réservation à venir.</small>
-                        </div>
-                        <div class="card-body text-center">
+                            <h3 class>Réservations automatiques à venir</h3>
+                            @if(\Auth::user()->bookings->count() > 0)
+                                <div class="row no-gutters">
+                                    <div class="col-2">ID</div>
+                                    <div class="col-4">Date</div>
+                                    <div class="col-3">Type</div>
+                                    <div class="col-3">Lieu</div>
+                                    @foreach(\Auth::user()->bookings as $booking)
+                                        <div class="col-2">
 
-                            <h3>Créer une réservation</h3>
-                            <div class="form-group row">
-                                <div class="col-8">
+                                            <form action="/bookings/{{$booking->id}}" method="post">
+                                                {{csrf_field()}}
+                                                <input type="hidden" name="_method" value="delete">
+                                                #{{$booking->swedishfit_id}}
 
-
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                        <span class="input-group-text"
-                                              id="sf_id">
-                                            https://www.swedishfit.fr/cours/detail/?id=
-                                        </span>
+                                                <button class="btn btn-sm btn-danger">
+                                                    x
+                                                </button>
+                                            </form>
                                         </div>
-                                        <input type="text" class="form-control" id="sf_id"
-                                               aria-describedby="sf_id">
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <button class="btn btn-primary btn-block">Rechercher</button>
+                                        <div class="col-4">{{$booking->details['date']}}</div>
+                                        <div class="col-3">{{$booking->details['type']}}</div>
+                                        <div class="col-3">
+                                            <small>{{$booking->details['location']}}</small>
+                                        </div>
+                                    @endforeach
                                 </div>
 
-                            </div>
+                            @else
+                                <small class="text-muted">Vous n'avez aucune réservation à venir.</small>
+                            @endif
                         </div>
+                        <div class="card-body text-center" id="bookSession">
+                            <book-session></book-session>
+                        </div>
+                        @push('scripts')
+                            <script>
+                                var bookSession = new Vue({
+                                    el: '#bookSession',
+                                })
+                            </script>
+                        @endpush
                     </div>
                 </div>
             </div>

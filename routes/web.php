@@ -18,3 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/session/{id}/details', 'HomeController@ajaxSessionDetails')->name('sessions.details');
+Route::delete('/bookings/{id}', 'HomeController@deleteBooking')->name('bookings.delete');
+Route::post('/bookings', 'HomeController@createBooking')->name('bookings.create');
