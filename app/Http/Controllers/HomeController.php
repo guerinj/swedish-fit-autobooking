@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Booking;
 use App\Jobs\GetSessionDetailsJob;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
@@ -39,10 +40,14 @@ class HomeController extends Controller
 
     public function createBooking( Request $request )
     {
+        $details = json_decode( $request->input( 'details' ), true );
+        $willBeBookedAt = Carbon::createFromTimestamp( $details['timestamp'] );
+        unset( $details['timestamp'] );
         $booking = Booking::create( [
-            'user_id'       => \Auth::id(),
-            'swedishfit_id' => $request->input( 'swedishfit_id' ),
-            'details'       => json_decode( $request->input( 'details' ) ),
+            'user_id'           => \Auth::id(),
+            'swedishfit_id'     => $request->input( 'swedishfit_id' ),
+            'details'           => $details,
+            'will_be_booked_at' => $willBeBookedAt,
         ] );
 
         return redirect( route( 'home' ) );

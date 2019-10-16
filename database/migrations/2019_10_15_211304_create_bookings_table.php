@@ -17,6 +17,7 @@ class CreateBookingsTable extends Migration
             $table->bigIncrements( 'id' );
             $table->unsignedInteger( 'swedishfit_id' );
             $table->unsignedInteger( 'user_id' );
+            $table->timestamp( 'will_be_booked_at' );
             $table->json( 'details' );
             $table->timestamps();
 

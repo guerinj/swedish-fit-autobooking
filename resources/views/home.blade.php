@@ -32,7 +32,7 @@
                                                 </button>
                                             </form>
                                         </div>
-                                        <div class="col-4">{{$booking->details['date']}}</div>
+                                        <div class="col-4">{{$booking->will_be_booked_at->formatLocalized("%d %b %Y")}} {{$booking->details['time']}}</div>
                                         <div class="col-3">{{$booking->details['type']}}</div>
                                         <div class="col-3">
                                             <small>{{$booking->details['location']}}</small>

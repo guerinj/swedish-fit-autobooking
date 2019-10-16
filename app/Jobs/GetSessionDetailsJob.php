@@ -4,6 +4,7 @@
 namespace App\Jobs;
 
 
+use Carbon\Carbon;
 use DOMDocument;
 use DOMNodeList;
 use DOMXPath;
@@ -91,7 +92,35 @@ class GetSessionDetailsJob
             'date'     => $sessionTitle,
             'time'     => $sessionSchedule,
             'type'     => $sessionType,
-            'location' => $sessionLocation
+            'location' => $sessionLocation,
+            'timestamp' => $this->parseTimeString($sessionTitle)
         ];
+    }
+
+
+    private function parseTimeString( $timeString )
+    {
+        $matches = [];
+
+        if ( ! preg_match( "/([0-9]{1,2}) (\w+) ([0-9]{4})$/", $timeString, $matches ) ) {
+            throw new \Exception( GetSessionDetailsJob::class . ' - Cannot determine the session date in '. $timeString );
+        }
+
+        $monthsToInt = [
+            'janvier'   => 1,
+            'février'   => 2,
+            'mars'      => 3,
+            'avril'     => 4,
+            'mai'       => 5,
+            'juin'      => 6,
+            'juillet'   => 7,
+            'août'      => 8,
+            'septembre' => 9,
+            'octobre'   => 10,
+            'novembre'  => 11,
+            'décembre'  => 12,
+        ];
+
+        return Carbon::create( $matches[3], $monthsToInt[ mb_strtolower( $matches[2] ) ], $matches[1] )->timestamp;
     }
 }
