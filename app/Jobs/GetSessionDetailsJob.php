@@ -68,7 +68,7 @@ class GetSessionDetailsJob
         }
         $sessionTitle = $titleNodes->item( 0 )->textContent;
 
-        $scheduleNodes = $finder->query( "//*[contains(@class, '__schedule')]//h2" );
+        $scheduleNodes = $finder->query( "//*[contains(@class, '_schedule')]//h2" );
         if ( $scheduleNodes->count() !== 1 ) {
             throw new \Exception( GetSessionDetailsJob::class . ' - Cannot determine the session schedule' );
         }
@@ -102,7 +102,7 @@ class GetSessionDetailsJob
     {
         $matches = [];
 
-        if ( ! preg_match( "/([0-9]{1,2}) (\w+) ([0-9]{4})$/", $timeString, $matches ) ) {
+        if ( ! preg_match( "/\w+ ([0-9]{1,2}) (.+) ([0-9]{4})$/", $timeString, $matches ) ) {
             throw new \Exception( GetSessionDetailsJob::class . ' - Cannot determine the session date in '. $timeString );
         }
 
