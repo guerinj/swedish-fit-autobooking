@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-body text-center">
 
-                        <h1>Swedish Fit auto-login</h1>
+                        <h1>Swedish Fit Autobooking</h1>
                         <p>Réservez vos cours Swedish Fit en avance.</p>
 
                         <div class="card-body text-center">
