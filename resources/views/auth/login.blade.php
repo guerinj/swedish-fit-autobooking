@@ -9,8 +9,8 @@
 
                 <div class="card-body">
 
-                    <h1 class="text-center">Swedish Fit auto-login</h1>
-                    <p class="text-center">Réservez vos cours Swedish Fit en avance.</p>
+                    <h1 class="text-center">Swedish Fit Autobooking</h1>
+                    <p class="text-center">Connecte toi !</p>
                     <form method="POST" action="{{ route('login') }}" class="mt-4">
                         @csrf
 
@@ -63,6 +63,9 @@
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
+                                    </a>
+                                    <a class="btn btn-link" href="{{ route('register') }}">
+                                        {{ __('Créer un compte') }}
                                     </a>
                                 @endif
                             </div>

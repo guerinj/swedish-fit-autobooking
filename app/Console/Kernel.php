@@ -26,7 +26,6 @@ class Kernel extends ConsoleKernel
     protected function schedule( Schedule $schedule )
     {
         $schedule->command( 'booking:trigger-bookings' )->dailyAt('00:01');
-        $schedule->command( 'booking:trigger-bookings' )->dailyAt('00:10');
     }
 
     /**
